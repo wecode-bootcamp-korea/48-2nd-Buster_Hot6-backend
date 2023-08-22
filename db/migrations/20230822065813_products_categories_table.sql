@@ -1,7 +1,8 @@
 -- migrate:up
-CREATE TABLE products_category(
+CREATE TABLE products_categories(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 );
+
 -- migrate:down
-DROP TABLE product_category;
+DROP TABLE products_categories;
