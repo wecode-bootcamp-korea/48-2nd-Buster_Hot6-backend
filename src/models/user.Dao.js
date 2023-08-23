@@ -1,6 +1,6 @@
 const { AppDataSource }= require('../models/dataSource');
 
-const createUser = async (nickname, email, Password) => {
+const createUser = async (nickname, email, password) => {
   try {
     const result = await AppDataSource.query(
       `
@@ -14,7 +14,7 @@ const createUser = async (nickname, email, Password) => {
           ?
         )
       `,
-      [nickname, email, Password]
+      [nickname, email, password]
     );
 
     return result;
