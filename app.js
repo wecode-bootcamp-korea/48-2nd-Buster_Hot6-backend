@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const { dataSource } = require("./src/models/dataSource");
+const { AppDataSource } = require("./src/models/dataSource");
 
 
 const app = express();
@@ -19,7 +19,7 @@ app.get("/ping", (req, res, next) => {
 const startServer = async () => {
   const PORT = process.env.PORT;
 
-  await dataSource.initialize();
+  await AppDataSource.initialize();
 
   app.listen(PORT, () => {
     console.log(`Listening on Port ${PORT}`);
