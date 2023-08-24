@@ -4,7 +4,7 @@ CREATE TABLE refunds(
     orders_products_id INT NOT NULL,
     refund_reason VARCHAR(3000) NOT NULL,
     refund_image VARCHAR(1000) NOT NULL,
-    FOREIGN KEY (orders_products_id) REFERENCES orders_products (id)
+    FOREIGN KEY (orders_products_id) REFERENCES orders_products(id)
 );
 
 -- migrate:down
