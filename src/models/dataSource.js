@@ -1,6 +1,5 @@
 const { DataSource } = require("typeorm");
 
-
 const AppDataSource = new DataSource({
   type: process.env.DB_TYPE,
   host: process.env.DB_HOST,
