@@ -1,11 +1,11 @@
 -- migrate:up
-CREATE TABLE scraps(
+CREATE TABLE porductsScraps(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    post_id INT NOT NULL,
+    product_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (post_id) REFERENCES posts (id)
-);
+    FOREIGN KEY (product_id) REFERENCES products (id)
+)
 
 -- migrate:down
-DROP TABLE scraps;
+
