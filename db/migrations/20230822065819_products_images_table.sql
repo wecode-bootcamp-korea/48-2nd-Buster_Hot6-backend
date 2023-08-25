@@ -7,4 +7,4 @@ CREATE TABLE products_images(
 );
 
 -- migrate:down
-DROP TABLE products_image;
+DROP TABLE products_images;
