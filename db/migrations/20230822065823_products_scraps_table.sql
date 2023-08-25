@@ -1,5 +1,5 @@
 -- migrate:up
-CREATE TABLE porducts_scraps(
+CREATE TABLE products_scraps(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     product_id INT NOT NULL,
@@ -8,4 +8,4 @@ CREATE TABLE porducts_scraps(
 );
 
 -- migrate:down
-DROP TABLE porducts_scraps;
+DROP TABLE products_scraps;
