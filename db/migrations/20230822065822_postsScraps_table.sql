@@ -1,5 +1,5 @@
 -- migrate:up
-CREATE TABLE postsScraps(
+CREATE TABLE posts_scraps(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     post_id INT NOT NULL,
@@ -8,4 +8,4 @@ CREATE TABLE postsScraps(
 );
 
 -- migrate:down
-DROP TABLE postsScraps;
+DROP TABLE posts_scraps;
