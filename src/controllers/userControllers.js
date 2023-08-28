@@ -29,6 +29,7 @@ const signIn = async (req, res) => {
     res.status(200).json({ accessToken});
     
   } catch (error) {
+    console.log("컨트롤",error)
     res.status(401).json({ message: error.message });
   }
 };

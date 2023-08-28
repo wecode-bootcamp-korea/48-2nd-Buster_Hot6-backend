@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const userDao  = require("../models/user.Dao");
+const userDao  = require("../models/userDao");
 const { validateEmailAndPassword } = require("../utils/validate")
 
 const saltRounds = 10;

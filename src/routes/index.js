@@ -7,6 +7,5 @@ const productsRoutes = require("./productsRoutes")
 routes.use("/users", userRouter);
 routes.use("/products", productsRoutes);
 
-
-module.exports = { routes } ;
+module.exports = {routes } ;
 

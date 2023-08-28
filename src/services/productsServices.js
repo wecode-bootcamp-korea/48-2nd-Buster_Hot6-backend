@@ -1,6 +1,6 @@
 const { getProductsByCategoryId } = require('../models/productsDao');
 
-const categoryService = async (categoryId, offset, limit, minPrice, maxPrice, sortBy) => {
+const productService = async (categoryId, offset, limit, minPrice, maxPrice, sortBy) => {
 
 const ordering = async (sortBy) => {
     switch (sortBy) {
@@ -31,5 +31,5 @@ const ordering = async (sortBy) => {
 
 
 module.exports = {
-    categoryService,
+    productService
 };
