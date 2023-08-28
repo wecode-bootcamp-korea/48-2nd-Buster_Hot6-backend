@@ -28,7 +28,6 @@ const signUp = async (nickname, email, password) => {
 
 const signIn = async (email, password) => {
   const user = await userDao.getUserByEmail(email);
-  console.log("Fetched user: ", user);
 
   if (!user) {
     const error = new Error('INVALID_USER user');
@@ -49,7 +48,7 @@ const signIn = async (email, password) => {
     algorithm: process.env.ALGORITHM,
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
-  
+
   return accessToken;
 };
 
