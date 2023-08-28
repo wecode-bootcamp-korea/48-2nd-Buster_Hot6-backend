@@ -19,7 +19,7 @@ const products = await AppDataSource.query(`
     FROM products p
     INNER JOIN products_categories pc ON p.products_category_id = pc.id
     LEFT JOIN products_images pi ON p.id = pi.product_id
-    WHERE pc.name = ?  
+    WHERE pc.id = ?  
     LIMIT ?, ?;
     `
     
@@ -45,7 +45,9 @@ const getAllProducts = async () => {
     pi.image_url
     FROM products p
     INNER JOIN products_categories pc ON p.products_category_id = pc.id
-    LEFT JOIN products_images pi ON p.id = pi.product_id`);
+    LEFT JOIN products_images pi ON p.id = pi.product_id
+    `
+    );
     return products;
 };
 const getProductsByCategoryName = async (categoryName, offset, limit) => {
