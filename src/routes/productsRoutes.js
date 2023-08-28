@@ -3,7 +3,7 @@ const router = express.Router();
 const productsController = require("../controllers/products.Controllers");
 const { getProductsByCategoryName } = require("../models/productsDao");
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   const { categoryName, categoryId, offset = 0, limit = 10 } = req.query;
 
   if (categoryName) {

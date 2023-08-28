@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const userDao  = require("../models/userDao");
 const { validateEmailAndPassword } = require("../utils/validate")
@@ -30,7 +30,7 @@ const signIn = async (email, password) => {
   const user = await userDao.getUserByEmail(email);
 
   if (!user) {
-    const error = new Error('INVALID_USER user');
+    const error = new Error("INVALID_USER user");
     error.statusCode = 401;
 
     throw error;
@@ -39,7 +39,7 @@ const signIn = async (email, password) => {
   const isMatched = await bcrypt.compare(password, user.password);
 
   if (!isMatched) {
-    const error = new Error('INVALID_USER');
+    const error = new Error("INVALID_USER");
     error.statusCode = 401;
 
     throw error;

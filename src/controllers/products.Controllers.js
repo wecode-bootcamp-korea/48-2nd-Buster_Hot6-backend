@@ -1,6 +1,6 @@
-const {productService} = require('../services/productsServices');
-const { getAllProducts } = require('../models/productsDao');
-const {catchAsync}  = require('../utils/error');
+const {productService} = require("../services/productsServices");
+const { getAllProducts } = require("../models/productsDao");
+const {catchAsync}  = require("../utils/error");
 
 const getProductsByCategoryId = catchAsync(async (req, res, next) => {
     try {

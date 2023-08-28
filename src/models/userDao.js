@@ -1,7 +1,8 @@
-const { AppDataSource } = require('./dataSource');
+const { AppDataSource } = require("./dataSource");
 
 const getProductsByCategoryId = async (categoryId, offset, limit, orderingQuery, priceRangeQuery) => {
-const products = await AppDataSource.query(`
+const products = await AppDataSource.query(
+  `
     SELECT 
     p.id, 
     p.products_category_id, 

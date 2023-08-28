@@ -11,7 +11,7 @@ const validateEmailAndPassword = (email, password) => {
     throw err;
   }
   if (!passwordRegex.test(password)) {
-    const error = new Error('INVALID_USER password');
+    const error = new Error("INVALID_USER password");
     error.statusCode = 400;
 
     throw error;
