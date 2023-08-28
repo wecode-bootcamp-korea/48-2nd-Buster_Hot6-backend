@@ -2,15 +2,16 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const routes = express.Router();
-const { AppDataSource } = require("./src/models/data-source");
 
+const { AppDataSource } = require("./src/models/data-source");
+const { router } = require("./src/routes");
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(morgan('combined'));
-app.use(routes);
+app.use(morgan("combined"));
+app.use(router);
+
 app.get("/ping", (req, res, next) => {
   res.status(200).json({ message: "pong" });
 });
