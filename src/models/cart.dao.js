@@ -1,4 +1,4 @@
-const { AppDataSource } = require("./data-source");
+const { AppDataSource } = require("./dataSource");
 
 const insertCart = async (user_id, product_id, product_count) => {
   await AppDataSource.query(
