@@ -1,12 +1,11 @@
 const { AppDataSource }= require('../models/dataSource');
-
 const createUser = async (nickname, email, password) => {
   try {
     const result = await AppDataSource.query(
       `
         INSERT INTO users (
-          nickname, 
-          email, 
+          nickname,
+          email,
           password
         ) VALUES (
           ?,
@@ -16,16 +15,13 @@ const createUser = async (nickname, email, password) => {
       `,
       [nickname, email, password]
     );
-
     return result;
   } catch {
     const error = new Error('dataSource Error');
     error.statusCode = 400;
-
     throw error;
   }
 };
-
 const getUserByEmail = async (email) => {
   try {
     const [result] = await AppDataSource.query(
@@ -40,21 +36,18 @@ const getUserByEmail = async (email) => {
       `,
       [email]
     );
-
     return result;
   } catch {
     const error = new Error('dataSource Error email');
     error.statusCode = 400;
-
     throw error;
   }
 };
-
 const getUserById = async (id) => {
   try {
     const [result] = await AppDataSource.query(
       `
-        SELECT 
+        SELECT
           id,
           nickname,
           email,
@@ -64,14 +57,11 @@ const getUserById = async (id) => {
       `,
       [id]
     );
-
     return result;
   } catch {
     const error = new Error('dataSource Error id');
     error.statusCode = 400;
-
     throw error;
   }
 };
-
 module.exports = { createUser,  getUserByEmail,  getUserById };

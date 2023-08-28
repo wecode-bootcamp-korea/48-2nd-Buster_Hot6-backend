@@ -11,12 +11,11 @@ const { nickname, email, password } = req.body;
     throw error;
   }
 
-  const creteUser = await userService.signUp(
+  const createUser = await userService.signUp(
     nickname,
     email,
     password
   );
-
   res.status(201).json({ message: 'user is created' });
 });
 
