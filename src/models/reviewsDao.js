@@ -1,6 +1,7 @@
 const { AppDataSource } = require("./dataSource");
 
 const setReview = async (userID) => {
+    try {
     const result = await AppDataSource.query(
         `
         SELECT nickname, porfile_image
@@ -9,12 +10,19 @@ const setReview = async (userID) => {
         ;
         `,
         [userID]
-    )
+    );
     return result;
-};
+    }catch{
+    const error = new Error ('dataSource Error');
+    error.ststusCode = 400;
+ 
+    throw error;
+   }
+ }; 
 
 const createReview = async (userId, content, rating) => {
-    await AppDataSource.query(
+    try{
+    const result = await AppDataSource.query(
         `
         INSERT INTO reviews (
          user_id,
@@ -26,10 +34,18 @@ const createReview = async (userId, content, rating) => {
     `,
     [ userId, content, rating ]
     );
-};
+    return result;
+    }catch{
+    const error = new Error ('dataSource Error');
+    error.ststusCode = 400;
+ 
+    throw error;
+   }
+ };
 
 const modifyReview =  async ( content, rating, reviewId)=>{
-    await AppDataSource.query(
+    try {
+    const result = await AppDataSource.query(
         `
         UPDATE reviews
         SET
@@ -40,11 +56,19 @@ const modifyReview =  async ( content, rating, reviewId)=>{
         ;
         `,
         [content, rating, reviewId]
-    );
-};
+     );
+return result;
+  }catch{
+   const error = new Error ('dataSource Error');
+   error.ststusCode = 400;
+
+   throw error;
+  }
+}; 
 
 const deleteReview = async (reviewId)=>{
- await AppDataSource.query(
+ try{
+   const result = await AppDataSource.query(
     `
     DELETE FROM reviews
     WHERE id = ?
@@ -52,6 +76,13 @@ const deleteReview = async (reviewId)=>{
     `,
     [reviewId]
     );
-};
+    return result;
+    }catch{
+    const error = new Error ('dataSource Error');
+    error.ststusCode = 400;
+ 
+    throw error;
+   }
+ };
 
 module.exports = { setReview, createReview, modifyReview, deleteReview };

@@ -1,11 +1,11 @@
 const productScrapDao = require("../models/productScrapsDao");
 
-const productScrapButtonOn = async (userId, productId)=>{
-    return await productScrapDao.productScrapOnByUser(userId, productId);
+const getProductScrap = async (userId, productId)=>{
+    return await productScrapDao.getProductScrapByUser(userId, productId);
 };
 
-const productScrapButtonOff = async (userId, productId)=>{
-    return await productScrapDao.productScrapOffByUser(userId, productId);
+const deleteProductScrap = async (userId, productId)=>{
+    return await productScrapDao.deleteProductScrapByUser(userId, productId);
 };
 
-module.exports = { productScrapButtonOn, productScrapButtonOff }
+module.exports = { getProductScrap, deleteProductScrap }

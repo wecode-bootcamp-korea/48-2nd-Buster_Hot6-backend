@@ -1,11 +1,11 @@
 const postScrapDao = require("../models/postScrapsDao");
 
-const postScrapButtonOn = async (userId, postId)=>{
-    return await postScrapDao.postScrapOnByUser(userId, postId);
+const getPostScrap = async (userId, postId)=>{
+    return await postScrapDao.getPostScrapByUser(userId, postId);
 };
 
-const postScrapButtonOff = async (userId, postId)=>{
-    return await postScrapDao.postScrapOffByUser(userId, postId);
+const deletePostScrap = async (userId, postId)=>{
+    return await postScrapDao.deletePostScrapByUser(userId, postId);
 };
 
-module.exports = { postScrapButtonOn, postScrapButtonOff }
+module.exports = { getPostScrap, deletePostScrap }

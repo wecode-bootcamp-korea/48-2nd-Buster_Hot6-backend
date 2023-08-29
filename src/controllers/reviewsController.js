@@ -1,52 +1,34 @@
 const reviewsService = require ("../services/reviewsService");
+const { catchAsync } = require('../utils/error')
 
-const reviewSet = async (req, res)=> {
-    try{
-        const userId = req.user.id;
-        const reviewSetId = await reviewsService.reviewSet(userId);
+    const reviewSet = catchAsync(async(req, res) => {
+    const userId = req.user.id;
+    const reviewSetId = await reviewsService.reviewSet(userId);
     
-        res.status(200).json({reviewSetId});
-    } catch (err) {
-        res.status(err.statusCode || 400).json({ message: err.message });
-    }
-};
+    res.status(200).json({reviewSetId});
+});
 
-const reviewCreate = async (req,res) => {
-    try {
-        const userId = req.user.id;
-        const { content, rating } = req.body;
-        
-        await reviewsService.reviewCreate(userId, content, rating);
+const reviewCreate =  catchAsync(async(req, res) => {
+    const userId = req.user.id;
+    const { content, rating } = req.body;
+    const posts = await reviewsService.reviewCreate(userId, content, rating);
 
-        res.status(201).end();
-    } catch (err) {
-        res.status(err.statusCode || 400).json({ message: err.message });
-    }
-};
+    res.status(200).json({ data: posts });  
+});
 
-const reviewModify = async (req, res) => {
-    try {
-        const { content, rating, reviewId } = req.body;
+const reviewModify = catchAsync(async(req, res) => {
+    const { content, rating, reviewId } = req.body;
+    const posts = await reviewsService.reviewModify( content, rating, reviewId);
 
-        await reviewsService.reviewModify( content, rating, reviewId);
+    res.status(200).json({ data: posts }); 
+});
 
-        res.status(201).end();
-    } catch (err) {
-        res.status(err.statusCode || 400).json({ message: err.message });
-    }
-};
-
-const reviewDelete = async (req, res) =>{
-    try{
-        const { reviewId } = req.body;
-        
-        const result = await reviewsService.reviewDelete(reviewId);
-        console.log("DELETE", result)
-        res.status(201).json({ message: "success Delete"});
-    } catch (err) {
-        res.sgtatus(err.statusCode || 400).json({ message: err.message});
-    }
-};
+const reviewDelete = catchAsync(async(req, res) => {
+    const { reviewId } = req.body;
+    const posts = await reviewsService.reviewDelete(reviewId);
+    
+    res.status(200).json({ data: posts });  
+});
 
 module.exports = {
     reviewSet,

@@ -1,31 +1,20 @@
 const productScrapsService = require("../services/productScrapsService");
+const { catchAsync } = require('../utils/error')
 
-const productScrapon = async ( req, res ) =>{
-    try{
-        const { productId } = req.body;
-        const userId = req.user.id;
+const getProductScrap = catchAsync(async(req, res) =>{
+    const { productId } = req.body;
+    const userId = req.user.id;
+    const posts = await productScrapsService.getProductScrap(userId, productId);
 
-     await productScrapsService.productScrapButtonOn(userId, productId);
-
-     res.status(201).end();
-    }
-        catch (err) {
-        res.status(err.statusCode || 400).json({message: err.message});
-    }
-};
+    res.status(200).json({ data: posts });
+});
 
 
-const productScrapoff = async ( req, res ) =>{
-    try{
-        const { productId } = req.body;
-        const userId = req.user.id;
+const deletproductScrap = catchAsync(async( req, res ) => {
+    const { productId } = req.body;
+    const userId = req.user.id;
+    const posts = await productScrapsService.deletproductScrap(userId, productId );
 
-        await productScrapsService.productScrapButtonOff(userId, productId );
-
-        res.status(201).end();
-    }
-        catch (err) {
-        res.status(err.statusCode || 400).json({message: err.message});
-        }
-};
-module.exports = { productScrapon, productScrapoff };
+    res.status(200).json({ data: posts });
+});
+module.exports = { getProductScrap, deletproductScrap };
