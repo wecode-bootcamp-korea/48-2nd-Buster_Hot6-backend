@@ -1,7 +1,8 @@
 const { AppDataSource } = require("./dataSource");
 
-const productScrapOnByUser = async (userId, productId) => {
-  await AppDataSource.query(
+const getProductScrapByUser = async (userId, productId) => {
+  try {
+  const result = await AppDataSource.query(
     `
       INSERT INTO products_scraps (
       user_id,
@@ -12,10 +13,18 @@ const productScrapOnByUser = async (userId, productId) => {
       `,
     [userId, productId]
   );
-};
+return result;
+  }catch{
+   const error = new Error ('dataSource Error');
+   error.ststusCode = 400;
 
-const productScrapOffByUser = async (userId, productId) => {
-  await AppDataSource.query(
+   throw error;
+  }
+}; 
+
+const deleteProductScrapByUser = async (userId, productId) => {
+  try {
+    const result = await AppDataSource.query(
     `
       DELETE FROM products_scraps
       WHERE user_id = ? AND
@@ -23,7 +32,14 @@ const productScrapOffByUser = async (userId, productId) => {
       ;
       `,
     [userId, productId]
-  );
-};
+    );
+return result;
+  }catch{
+   const error = new Error ('dataSource Error');
+   error.ststusCode = 400;
 
-module.exports = { productScrapOnByUser, productScrapOffByUser };
+   throw error;
+  }
+}; 
+
+module.exports = { getProductScrapByUser, deleteProductScrapByUser };

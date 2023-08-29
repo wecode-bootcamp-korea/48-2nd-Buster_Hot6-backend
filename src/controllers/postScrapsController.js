@@ -1,30 +1,20 @@
 const postScrapsService = require("../services/postScrapsService");
+const { catchAsync } = require('../utils/error')
 
-const postScrapOn = async ( req, res ) =>{
-    try{
-        const  { postId }  = req.body;
-        const userId = req.user.id;
-     await postScrapsService.postScrapButtonOn(userId, postId);
+const getPostScrap = catchAsync(async (req, res) =>{
+    const  { postId }  = req.body;
+    const userId = req.user.id;
+    const posts = await postScrapsService.getPostScrap(userId, postId);
 
-     res.status(201).end();
-    }
-        catch (err) {
-        res.status(err.statusCode || 400).json({message: err.message});
-    }
-};
+    res.status(200).json({ data: posts });
+});
 
+const deletePostScrap = catchAsync (async(req, res) =>{
+    const { postId } = req.body;
+    const userId = req.user.id;
+    const posts = await postScrapsService.deletePostScrap(userId, postId );
 
-const postScrapOff = async ( req, res ) =>{
-    try{
-        const { postId } = req.body;
-        const userId = req.user.id;
+    res.status(200).json({ data: posts });
+});
 
-        await postScrapsService.postScrapButtonOff(userId, postId );
-
-        res.status(201).end();
-    }
-        catch (err) {
-        res.status(err.statusCode || 400).json({message: err.message});
-        }
-};
-module.exports = { postScrapOn, postScrapOff };
+module.exports = { getPostScrap, deletePostScrap };

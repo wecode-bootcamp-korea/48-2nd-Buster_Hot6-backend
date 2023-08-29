@@ -4,7 +4,7 @@ const productScrapsController = require("../controllers/productScrapsController"
 const productScrapsRouter = express.Router();
 const { loginRequired } = require('../utils/auth')
 
-productScrapsRouter.post("/scrapOn", loginRequired, productScrapsController.productScrapon);
-productScrapsRouter.delete("/scrapOff", loginRequired, productScrapsController.productScrapoff);
+productScrapsRouter.post("/scrap", loginRequired, productScrapsController.getProductScrap);
+productScrapsRouter.delete("/scrap", loginRequired, productScrapsController.getProductScrap);
 
 module.exports = { productScrapsRouter };
