@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
 
   if (categoryId) {
     try {
-      req.params.categoryId = categoryId; // productsController.getProductsByCategoryId가 params를 사용하므로
+      req.params.categoryId = categoryId;
       productsController.getProductsByCategoryId(req, res);
     } catch (error) {
       console.log(error)
