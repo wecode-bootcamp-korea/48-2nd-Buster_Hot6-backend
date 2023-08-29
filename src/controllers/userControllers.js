@@ -20,17 +20,12 @@ const { nickname, email, password } = req.body;
   res.status(201).json({ message: "user is created" });
 });
 
-const signIn = async (req, res) => {
-  try {
+const signIn = catchAsync(async (req, res) => {
     const { email, password } = req.body;
 
     const accessToken = await userService.signIn(email, password);
 
-    res.status(200).json({ accessToken});
-    
-  } catch (error) {
-    res.status(401).json({ message: error.message });
-  }
-};
+    res.status(200).json({ accessToken}); 
+})
 
 module.exports = { signUp,  signIn };

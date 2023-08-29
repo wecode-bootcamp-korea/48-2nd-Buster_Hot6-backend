@@ -18,7 +18,7 @@ const createUser = async (nickname, email, password) => {
     );
 
     return result;
-  } catch {
+  } catch{
     const error = new Error("dataSource Error");
     error.statusCode = 400;
 
