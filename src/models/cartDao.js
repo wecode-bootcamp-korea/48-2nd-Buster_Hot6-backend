@@ -41,7 +41,7 @@ const deleteCart = async (user_id, product_id) => {
 
 const getCartList = async (user_id) => {
   try {
-    await AppDataSource.query(
+    const cartList = await AppDataSource.query(
       `
     SELECT c.id, c.user_id, c.product_id, c.product_count, i.image_url, p.name, p.price, b.name
     FROM carts c
@@ -53,6 +53,7 @@ const getCartList = async (user_id) => {
     `,
       [user_id]
     );
+    return cartList;
   } catch {
     const error = new Error("dataSource Error");
     error.statusCode = 400;

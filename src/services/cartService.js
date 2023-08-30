@@ -8,4 +8,8 @@ const deleteCart = async (userId, productId) => {
   await cartDao.deleteCart(userId, productId);
 };
 
-module.exports = { insertCart, deleteCart };
+const getCartList = async (userId) => {
+  return await cartDao.getCartList(userId);
+};
+
+module.exports = { insertCart, deleteCart, getCartList };

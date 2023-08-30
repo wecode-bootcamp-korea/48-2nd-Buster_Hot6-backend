@@ -10,11 +10,20 @@ const insertCart = catchAsync(async (req, res) => {
 });
 
 const deleteCart = catchAsync(async (req, res) => {
-  const { productId, userId } = req.body;
+  const userId = req.user.id;
+  const { productId } = req.body;
 
   await cartService.deleteCart(userId, productId);
 
   res.status(201).end();
 });
 
-module.exports = { insertCart, deleteCart };
+const getCartList = catchAsync(async (req, res) => {
+  const userId = req.user.id;
+
+  const cartList = await cartService.getCartList(userId);
+
+  return res.json(cartList);
+});
+
+module.exports = { insertCart, deleteCart, getCartList };
