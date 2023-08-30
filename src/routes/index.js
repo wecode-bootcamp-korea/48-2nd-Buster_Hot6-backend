@@ -7,6 +7,6 @@ const { cartRouter } = require("./cartRouter");
 
 routes.use("/users", userRouter);
 routes.use("/products", productsRoutes);
-router.use("/cart", cartRouter);
+routes.use("/cart", cartRouter);
 
 module.exports = { routes, productsRoutes };

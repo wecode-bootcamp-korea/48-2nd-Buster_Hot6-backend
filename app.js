@@ -7,8 +7,6 @@ const { AppDataSource } = require("./src/models/dataSource");
 const { routes } = require("./src/routes");
 const { globalErrorHandler } = require("./src/utils/error");
 
-const { AppDataSource } = require("./src/models/dataSource");
-const { router } = require("./src/routes");
 const app = express();
 
 app.use(express.json());

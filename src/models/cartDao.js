@@ -16,9 +16,10 @@ const insertCart = async (user_id, product_id, product_count) => {
     `,
       [user_id, product_id, product_count]
     );
-  } catch (eroor) {
-    const error = new Error("DataSource ERROR");
-    error.statusCode = 401;
+  } catch {
+    const error = new Error("dataSource Error");
+    error.statusCode = 400;
+    throw error;
   }
 };
 
@@ -31,9 +32,10 @@ const deleteCart = async (user_id, product_id) => {
     `,
       [user_id, product_id]
     );
-  } catch (eroor) {
-    const error = new Error("DataSource ERROR");
-    error.statusCode = 401;
+  } catch {
+    const error = new Error("dataSource Error");
+    error.statusCode = 400;
+    throw error;
   }
 };
 
@@ -41,16 +43,20 @@ const getCartList = async (user_id) => {
   try {
     await AppDataSource.query(
       `
-    SELECT c.id, c.user_id, c.product_id, c.product_count
+    SELECT c.id, c.user_id, c.product_id, c.product_count, i.image_url, p.name, p.price, b.name
     FROM carts c
     JOIN users u ON c.user_id = u.id
+    JOIN products p ON c.product_id = p.id
+    JOIN products_images i ON i.product_id = p.id
+    JOIN brands b ON b.id = p.brand_id
     WHERE c.user_id = ?
     `,
       [user_id]
     );
-  } catch (eroor) {
-    const error = new Error("DataSource ERROR");
-    error.statusCode = 401;
+  } catch {
+    const error = new Error("dataSource Error");
+    error.statusCode = 400;
+    throw error;
   }
 };
 
