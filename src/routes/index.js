@@ -1,8 +1,15 @@
 const express = require("express");
 
-const { reviewsRouter } = require("./reviewsRouter")
+const { productScrapsRouter } = require("./productScrapsRouter")
+const { postScrapsRouter } = require("./postScrapsRouter")
+
 const routes = express.Router();
+const { userRouter } = require("./userRouter")
+const productsRoutes = require("./productsRoutes")
 
-routes.use("/reviews", reviewsRouter);
+routes.use("/users", userRouter);
+routes.use("/product-scrap", productScrapsRouter);
+routes.use("/post-scrap", postScrapsRouter);
+routes.use("/products", productsRoutes);
 
-module.exports = { routes } ;
+module.exports = {routes,productsRoutes} ;
