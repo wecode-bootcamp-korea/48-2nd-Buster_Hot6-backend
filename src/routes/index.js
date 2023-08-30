@@ -6,8 +6,8 @@ const { postScrapsRouter } = require("./postScrapsRouter")
 const routes = express.Router();
 
 routes.use("/users", userRouter);
-routes.use("/productScrap", productScrapsRouter);
-routes.use("/postScrap", postScrapsRouter);
+routes.use("/product-scrap", productScrapsRouter);
+routes.use("/post-scrap", postScrapsRouter);
 
 
 module.exports = { routes } ;

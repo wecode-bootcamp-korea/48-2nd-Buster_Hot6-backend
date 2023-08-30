@@ -1,4 +1,4 @@
-const productScrapsService = require("../services/productScrapsService");
+const productScrapsService = require("../services/productService");
 const { catchAsync } = require('../utils/error')
 
 const getProductScrap = catchAsync(async(req, res) =>{

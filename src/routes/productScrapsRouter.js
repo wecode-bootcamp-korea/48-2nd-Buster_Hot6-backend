@@ -1,6 +1,6 @@
 const express = require("express");
 
-const productScrapsController = require("../controllers/productScrapsController");
+const productScrapsController = require("../controllers/productController");
 const productScrapsRouter = express.Router();
 const { loginRequired } = require('../utils/auth')
 

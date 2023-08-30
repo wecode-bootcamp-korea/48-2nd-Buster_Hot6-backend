@@ -1,4 +1,4 @@
-const postScrapsService = require("../services/postScrapsService");
+const postScrapsService = require("../services/postService");
 const { catchAsync } = require('../utils/error')
 
 const getPostScrap = catchAsync(async (req, res) =>{
