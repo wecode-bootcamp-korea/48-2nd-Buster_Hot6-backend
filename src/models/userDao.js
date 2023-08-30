@@ -1,4 +1,4 @@
-const { AppDataSource }= require('../models/dataSource');
+const { AppDataSource }= require("./dataSource");
 
 const createUser = async (nickname, email, password) => {
   try {
@@ -18,8 +18,8 @@ const createUser = async (nickname, email, password) => {
     );
 
     return result;
-  } catch {
-    const error = new Error('dataSource Error');
+  } catch{
+    const error = new Error("dataSource Error");
     error.statusCode = 400;
 
     throw error;
@@ -43,7 +43,7 @@ const getUserByEmail = async (email) => {
 
     return result;
   } catch {
-    const error = new Error('dataSource Error email');
+    const error = new Error("dataSource Error email");
     error.statusCode = 400;
 
     throw error;
