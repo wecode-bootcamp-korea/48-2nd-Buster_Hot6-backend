@@ -1,9 +1,15 @@
 const express = require("express");
-const productRoutes = express.Router();
-const {getProductsByCategoryId, getProducts, handleGetProductsByCategory} = require("../controllers/productsControllers");
+const productsRoutes = express.Router();
+const {
+  getProductsByCategoryId,
+  getProducts,
+  handleGetProductsByCategory,
+  selectProductDetail,
+} = require("../controllers/productsControllers");
 
-productRoutes.get("/products/byCategory", getProductsByCategoryId);
-productRoutes.get("/products/all", getProducts);
-productRoutes.get("/products/:productId", handleGetProductsByCategory);
+productsRoutes.get("/products/byCategory", getProductsByCategoryId);
+productsRoutes.get("/products/all", getProducts);
+productsRoutes.get("/products/:productId", handleGetProductsByCategory);
+productsRoutes.get("/selectProductDetail", selectProductDetail);
 
-module.exports = productRoutes;
+module.exports = { productsRoutes };
