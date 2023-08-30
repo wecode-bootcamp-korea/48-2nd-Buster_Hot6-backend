@@ -1,6 +1,4 @@
-const jwt = require("jsonwebtoken");
-
-const cartDao = require("../models/cart.dao");
+const cartDao = require("../models/cartDao");
 
 const insertCart = async (userId, productId, productCount) => {
   await cartDao.insertCart(userId, productId, productCount);
