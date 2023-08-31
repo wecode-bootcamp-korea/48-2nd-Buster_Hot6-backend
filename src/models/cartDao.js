@@ -43,7 +43,7 @@ const getCartList = async (user_id) => {
   try {
     const cartList = await AppDataSource.query(
       `
-    SELECT c.id, c.user_id, c.product_id, c.product_count, i.image_url, p.name, p.price, b.name
+    SELECT c.product_id, i.image_url as image, p.name as product_name, p.price , b.name as brand_name
     FROM carts c
     JOIN users u ON c.user_id = u.id
     JOIN products p ON c.product_id = p.id

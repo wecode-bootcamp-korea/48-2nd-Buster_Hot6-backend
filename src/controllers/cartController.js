@@ -20,9 +20,7 @@ const deleteCart = catchAsync(async (req, res) => {
 
 const getCartList = catchAsync(async (req, res) => {
   const userId = req.user.id;
-
   const cartList = await cartService.getCartList(userId);
-
   return res.json(cartList);
 });
 
