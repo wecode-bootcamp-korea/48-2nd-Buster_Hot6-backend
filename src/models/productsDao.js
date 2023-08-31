@@ -26,7 +26,6 @@ const getAllProducts = async (offset = 0, limit = 10) => {
             `,
       [offset, limit]
     );
-    console.log(products)
     return products;
   } catch (eroor) {
     const error = new Error("DataSource ERROR Products");
