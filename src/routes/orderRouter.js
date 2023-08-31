@@ -1,9 +1,7 @@
-  const express = require ("express");
-  const orderRouter = express.Router();
+const express = require ('express');
+const orderRouter = express.Router();
+const orderController = require ("../controllers/orderController")
 
-  const { postOrder, handlePayment } = require ("../controllers/orderController");
+orderRouter.post("/delivery", orderController.postOrder);
 
-  orderRouter.post("/delivery", postOrder);
-  orderRouter.post("/payment", handlePayment);
-
-  module.exports = { orderRouter };
+module.exports = { orderRouter };

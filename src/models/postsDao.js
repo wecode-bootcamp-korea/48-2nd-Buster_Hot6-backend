@@ -1,4 +1,4 @@
-const { AppDataSource } = require("./dataSource");
+const  { AppDataSource }  = require("./dataSource");
 
 const getCategory = async () => {
   try{
@@ -27,7 +27,7 @@ const getCategory = async () => {
 
 const getPostScrap = async (userId, postId) => {
   try{
-    const [result] = await AppDataSource.query(
+    const result = await AppDataSource.query(
     `
       INSERT INTO posts_scraps (
       user_id,
@@ -49,7 +49,7 @@ const getPostScrap = async (userId, postId) => {
 
 const deletePostScrap = async (userId, postId) => {
   try {
-    const [result] = await AppDataSource.query(
+    const result = await AppDataSource.query(
       `
       DELETE FROM posts_scraps
       WHERE user_id = ? AND

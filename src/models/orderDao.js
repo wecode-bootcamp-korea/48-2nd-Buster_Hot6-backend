@@ -1,6 +1,6 @@
-const { AppDataSource } = require("./dataSource");
+const  { AppDataSource }  = require("./dataSource");
 
-const postOrder = async(
+const postOrder = async (
     userId, 
     name,
     email, 
@@ -9,7 +9,7 @@ const postOrder = async(
     deliveryName,
     deliveryPhoneNumber,
     address
-    )  => {
+    ) => {
     try{
     const result = await AppDataSource.query(
         `
