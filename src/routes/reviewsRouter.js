@@ -4,25 +4,22 @@ const reviewsController = require ("../controllers/reviewsController")
 const { loginRequired } = require('../utils/auth')
 
 reviewsRouter.get(
-    "/set",
+    "/reviews",
     loginRequired,
     reviewsController.reviewSet
-  );
-
+);
 reviewsRouter.post( 
-    "/contentup",
+    "/reviews",
     loginRequired, 
     reviewsController.reviewCreate
 );
-
 reviewsRouter.put(
-    "/modify",
+    "/reviews",
     loginRequired,
     reviewsController.reviewModify
 );
-
 reviewsRouter.delete(
-    "/delete",
+    "/reviews",
     loginRequired,
     reviewsController.reviewDelete
 );
