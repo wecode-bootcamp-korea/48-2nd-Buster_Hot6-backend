@@ -1,10 +1,10 @@
-const postScrapsService = require("../services/postService");
+const postService = require("../services/postService");
 const { catchAsync } = require('../utils/error')
 
 const getPostScrap = catchAsync(async (req, res) =>{
     const  { postId }  = req.body;
     const userId = req.user.id;
-    const posts = await postScrapsService.getPostScrap(userId, postId);
+    const posts = await postService.getPostScrap(userId, postId);
 
     res.status(200).json({ data: posts });
 });
@@ -12,7 +12,7 @@ const getPostScrap = catchAsync(async (req, res) =>{
 const deletePostScrap = catchAsync (async(req, res) =>{
     const { postId } = req.body;
     const userId = req.user.id;
-    const posts = await postScrapsService.deletePostScrap(userId, postId );
+    const posts = await postService.deletePostScrap(userId, postId);
 
     res.status(200).json({ data: posts });
 });

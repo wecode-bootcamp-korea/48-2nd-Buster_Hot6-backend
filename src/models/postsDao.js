@@ -1,6 +1,6 @@
 const { AppDataSource } = require("./dataSource");
 
-const getPostScrapByUser = async (userId, postId) => {
+const getPostScrap = async (userId, postId) => {
   try{
     const [result] = await DataSource.query(
     `
@@ -23,7 +23,7 @@ const getPostScrapByUser = async (userId, postId) => {
 }
 
 
-const deletePostScrapByUser = async (userId, postId) => {
+const deletePostScrap = async (userId, postId) => {
   try{
     const [result] = await AppDataSource.query(
     `
@@ -43,4 +43,4 @@ const deletePostScrapByUser = async (userId, postId) => {
 }
 };
 
-module.exports = { getPostScrapByUser, deletePostScrapByUser };
+module.exports = { getPostScrap, deletePostScrap };
