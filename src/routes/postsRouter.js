@@ -6,6 +6,6 @@ const { loginRequired } = require("../utils/auth");
 
 postsRouter.post("/scrap", loginRequired, postController.getPostScrap);
 postsRouter.delete("/scrap", loginRequired, postController.deletePostScrap);
-postsRouter.get("", postController.postScrapCountByPostId);
+postsRouter.get("scrap", postController.postScrapCountByPostId);
 
 module.exports = { postsRouter };
