@@ -13,8 +13,19 @@ const getProductDetailById = async (productId) => {
   return productDetail;
 };
 
+const getProductScrap = async (userId, productId)=>{
+    return await productsDao.getProductScrap(userId, productId);
+};
+
+const deleteProductScrap = async (userId, productId)=>{
+    return await productsDao.deleteProductScrap(userId, productId);
+};
+
+
 module.exports = {
   getAllProducts,
   getProductsByCategoryId,
   getProductDetailById,
+  getProductScrap,
+  deleteProductScrap,
 };

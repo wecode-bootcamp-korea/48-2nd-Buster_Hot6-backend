@@ -29,8 +29,26 @@ const getProductDetail = catchAsync(async (req, res) => {
   return res.status(201).json(productDetail);
 });
 
+const getProductScrap = catchAsync(async(req, res) =>{
+    const { productId } = req.body;
+    const userId = req.user.id;
+    const posts = await productService.getProductScrap(userId, productId);
+
+    res.status(200).json({ data: posts });
+});
+
+const deleteProductScrap = catchAsync(async( req, res ) => {
+    const { productId } = req.body;
+    const userId = req.user.id;
+    const posts = await productService.deleteProductScrap(userId, productId );
+
+    res.status(200).json({ data: posts });
+});
+
 module.exports = {
   getAllProducts,
   getProductsByCategoryId,
   getProductDetail,
+  getProductScrap,
+  deleteProductScrap,
 };
