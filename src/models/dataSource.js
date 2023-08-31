@@ -9,4 +9,5 @@ const AppDataSource = new DataSource({
   database: process.env.DB_DATABASE,
 });
 
-module.exports = { AppDataSource };
+module.exports =  {AppDataSource} ;
+
