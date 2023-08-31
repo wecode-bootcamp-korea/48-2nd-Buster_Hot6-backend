@@ -90,7 +90,7 @@ const getProductDetailById = async (productId) => {
           JOIN products_categories c ON p.products_category_id = c.id
           JOIN products_images i ON i.product_id = p.id
           LEFT JOIN reviews r ON r.product_id = p.id
-          WHERE p.id = 1;
+          WHERE p.id = ?;
           `,
       [productId]
     );

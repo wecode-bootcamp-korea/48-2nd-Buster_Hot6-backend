@@ -1,7 +1,7 @@
 const productsDao = require("../models/productsDao");
 
 const getAllProducts = async (offset, limit) => {
-  return await productsDao.getProductsByCategoryId(offset, limit);
+  return await productsDao.getAllProducts(offset, limit);
 };
 
 const getProductsByCategoryId = async (categoryId, offset, limit) => {
