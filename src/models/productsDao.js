@@ -90,7 +90,7 @@ const getProductDetailById = async (productId) => {
           JOIN products_categories c ON p.products_category_id = c.id
           JOIN products_images i ON i.product_id = p.id
           LEFT JOIN reviews r ON r.product_id = p.id
-          WHERE p.id = 1;
+          WHERE p.id = ?;
           `,
       [productId]
     );
@@ -102,8 +102,26 @@ const getProductDetailById = async (productId) => {
   }
 };
 
+const getProductScrapCountByProductId = async (productId) => {
+  try {
+    const result = await AppDataSource.query(
+      `SELECT COUNT(*) AS scrap_count FROM products_scraps WHERE product_id = ?`,
+      [productId]
+    );
+
+    if (result && result.length > 0) {
+      const scrapCount = result[0].scrap_count;
+      console.log(scrapCount);
+      return scrapCount;
+    } else {
+      throw new Error("No data found for the given postId");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
 const getProductScrap = async (userId, productId) => {
-    try {
+  try {
     const result = await AppDataSource.query(
       `
         INSERT INTO products_scraps (
@@ -115,18 +133,18 @@ const getProductScrap = async (userId, productId) => {
         `,
       [userId, productId]
     );
-  return result;
-    }catch{
-     const error = new Error ('dataSource Error');
-     error.ststusCode = 400;
-  
-     throw error;
-    }
-  }; 
-  
-  const deleteProductScrap = async (userId, productId) => {
-    try {
-      const result = await AppDataSource.query(
+    return result;
+  } catch {
+    const error = new Error("dataSource Error");
+    error.ststusCode = 400;
+
+    throw error;
+  }
+};
+
+const deleteProductScrap = async (userId, productId) => {
+  try {
+    const result = await AppDataSource.query(
       `
         DELETE FROM products_scraps
         WHERE user_id = ? AND
@@ -134,21 +152,21 @@ const getProductScrap = async (userId, productId) => {
         ;
         `,
       [userId, productId]
-      );
-  return result;
-    }catch{
-     const error = new Error ('dataSource Error');
-     error.ststusCode = 400;
-  
-     throw error;
-    }
-  }; 
-  
+    );
+    return result;
+  } catch {
+    const error = new Error("dataSource Error");
+    error.ststusCode = 400;
+
+    throw error;
+  }
+};
 
 module.exports = {
   getAllProducts,
   getProductsByCategoryId,
   getProductDetailById,
+  getProductScrapCountByProductId,
   getProductScrap,
   deleteProductScrap,
 };

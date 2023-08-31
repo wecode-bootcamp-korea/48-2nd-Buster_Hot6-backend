@@ -5,12 +5,13 @@ const getPostScrap = async (userId, postId) => {
 };
 
 const deletePostScrap = async (userId, postId) => {
-  return await postsDao.deletePostScrap(userId, postId);
+  return await postScrapDao.deletePostScrap(userId, postId);
 };
 
-const getPostDetailById = async (postId) => {
-  const postDetail = await postsDao.getPostDetailById(postId);
-  return postDetail;
+const getPostScrapCountByPostId = async (postId) => {
+  const count = await postScrapDao.getPostScrapCountByPostId(postId);
+  console.log(count);
+  return count;
 };
 
-module.exports = { getPostScrap, deletePostScrap, getPostDetailById };
+module.exports = { getPostScrap, deletePostScrap, getPostScrapCountByPostId };
