@@ -8,7 +8,6 @@ const { productService } = require("../services/productsServices");
 
 const getProductsByCategoryId = catchAsync(async (req, res) => {
   const { categoryId } = req.query;
-  console.log(categoryId);
   const { offset = 0, limit = 10 } = req.query;
 
   const products = await productService(

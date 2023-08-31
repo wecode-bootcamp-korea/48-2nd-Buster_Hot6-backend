@@ -40,10 +40,11 @@ const signIn = async (email, password) => {
 
     throw error;
   }
-  const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+  const accessToken = await jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
     algorithm: process.env.ALGORITHM,
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
+  console.log(accessToken);
 
   return accessToken;
 };
