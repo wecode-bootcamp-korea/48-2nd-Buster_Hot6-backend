@@ -47,26 +47,42 @@ const postOrder = async (
     }
 };
 
-const createPaymentRecord = async (userId, amount, connection) => {
-    const [result] = await connection.query(
-        "INSERT INTO payments (user_id, amount) VALUES (?, ?)",
-        [userId, amount]
-    );
-    return result;
+const postPayment = async (userId, amount) => {
+    try {
+        // Update user points
+        const updateResult = await AppDataSource.query(
+            `UPDATE Users SET point = point- ? WHERE id = ?`,
+            [amount, userId]
+        );
+
+        if (updateResult.affectedRows === 0) {
+            const error = new Error('User not found or insufficient point');
+            error.statusCode = 404;
+            throw error;
+        }
+
+        // Save payment history (Assuming there's a PaymentHistory table)
+        await AppDataSource.query(
+            `INSERT INTO PaymentHistory (user_id, amount) VALUES (?, ?)`,
+            [userId, amount]
+        );
+
+        const [rows] = await AppDataSource.query(
+            `SELECT point FROM users WHERE id = ?`,
+            [userId]
+        );
+
+        // const updatedPoints = rows[0]?.point;  // 올바르게 'point'로 수정
+
+        return {updateResult, rows};
+    } catch (err) {
+        const error = new Error(err.message || 'Database error');
+        error.statusCode = 400;
+        throw error;
+    }
 };
 
-const deductUserBalance = async (userId, amount, connection) => {
-    const [result] = await connection.query(
-        "UPDATE users SET balance = balance - ? WHERE id = ?",
-        [amount, userId]
-    );
-    return result;
-};
-const getConnection = async () => {
-    return await AppDataSource.getConnection();
-};
 
 
 
-
-module.exports = { postOrder, createPaymentRecord, deductUserBalance, getConnection};
+module.exports = { postOrder, postPayment};

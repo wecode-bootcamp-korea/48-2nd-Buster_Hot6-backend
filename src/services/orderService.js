@@ -22,24 +22,10 @@ const postOrder = async (
     );
 };
 
-
-const processPayment = async (userId, amount) => {
-    const connection = await oderDao.getConnection();  // orderDao에서 getConnection 호출
-    try {
-        await connection.beginTransaction();
-        const paymentResult = await oderDao.createPaymentRecord(userId, amount, connection);
-        const balanceResult = await oderDao.deductUserBalance(userId, amount, connection);
-        await connection.commit();
-        return { paymentResult, balanceResult };
-    } catch (err) {
-        await connection.rollback();
-        console.error(err);
-        throw err;
-    } finally {
-        connection.release();
-    }
+const postPayment = async (userId, amount) => {
+    return await oderDao.postPayment(userId, amount);
 };
 
 
 
-module.exports = { postOrder, processPayment};
+module.exports = { postOrder, postPayment };

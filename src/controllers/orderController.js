@@ -28,22 +28,18 @@ const postOrder = catchAsync(async(req, res) => {
 });
 
 
-const handlePayment = async (req, res) => {
-    const userId = req.body.userId;
-    const amount = req.body.amount;
+const postPayment = catchAsync(async (req, res) => {
+  const userId = req.user.id; // Assuming the userId is stored in req.user by the auth middleware
+    const { amount } = req.body;
 
-    try {
-        const result = await orderService.processPayment(userId, amount);
-        res.status(200).json(result);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Internal Server Error");
-    }
-};
+  // Input validation
+    if (!amount || isNaN(amount) || amount <= 0) {
+    return res.status(400).json({ error: 'Invalid amount' });
+}
 
-module.exports = {
-    handlePayment
-};
+    const result = await orderService.postPayment(userId, amount);
+    
+    res.status(200).json({ data: result });
+});
 
-
-module.exports = { postOrder, handlePayment }
+module.exports = { postOrder, postPayment }
