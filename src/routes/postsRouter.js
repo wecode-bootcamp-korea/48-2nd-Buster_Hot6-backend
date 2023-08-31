@@ -1,11 +1,19 @@
-const express = require("express");
-
-const postController = require("../controllers/postController");
+const express = require ("express");
 const postsRouter = express.Router();
 const { loginRequired } = require("../utils/auth");
 
-postsRouter.post("/scrap", loginRequired, postController.getPostScrap);
-postsRouter.delete("/scrap", loginRequired, postController.deletePostScrap);
-postsRouter.get("", postController.postScrapCountByPostId);
+const {
+  getPostScrap,
+  deletePostScrap,
+  getCategory,
+  postScrapCountByPostId,
+  getPostDetail,
+} = require("../controllers/postController");
+
+postsRouter.post("/scrap", loginRequired, getPostScrap);
+postsRouter.delete("/scrap", loginRequired, deletePostScrap);
+postsRouter.get('/category', getCategory);
+postsRouter.get("/scrap", postScrapCountByPostId);
+postsRouter.get("/detail/:postId", getPostDetail);
 
 module.exports = { postsRouter };

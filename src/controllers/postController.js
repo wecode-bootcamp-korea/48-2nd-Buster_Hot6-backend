@@ -1,6 +1,13 @@
 const postService = require("../services/postService");
 const { catchAsync } = require("../utils/error");
 
+
+const getCategory = catchAsync(async (req, res) => {
+    const getPosts = await postService.getCategory();
+
+res.status(200).json({ getPosts });
+});
+
 const getPostScrap = catchAsync(async (req, res) => {
   const { postId } = req.body;
   const userId = req.user.id;
@@ -29,4 +36,4 @@ const getPostDetail = catchAsync(async (req, res) => {
   return res.status(201).json(postDetail);
 });
 
-module.exports = { getPostScrap, deletePostScrap, postScrapCountByPostId };
+module.exports = { getCategory, getPostScrap, deletePostScrap, postScrapCountByPostId, getPostDetail};

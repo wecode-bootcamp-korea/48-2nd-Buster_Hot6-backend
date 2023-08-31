@@ -17,4 +17,5 @@ productRouter.get("/detail/:productId", getProductDetail);
 productRouter.post("/scrap", loginRequired, getProductScrap);
 productRouter.delete("/scrap", loginRequired, deleteProductScrap);
 productRouter.get("/product", productScrapCountByProductId);
+
 module.exports = { productRouter };

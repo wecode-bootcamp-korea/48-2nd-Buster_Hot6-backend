@@ -120,6 +120,7 @@ const getProductScrapCountByProductId = async (productId) => {
     throw error;
   }
 };
+
 const getProductScrap = async (userId, productId) => {
   try {
     const result = await AppDataSource.query(
