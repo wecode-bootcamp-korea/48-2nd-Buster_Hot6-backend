@@ -5,9 +5,9 @@ const productService = require("../services/productsServices");
 const getAllProducts = catchAsync(async (req, res) => {
   const { offset = 0, limit = 10 } = req.query;
 
-  const products = await productService.getAllProducts();
+  const products = await productService.getAllProducts(offset, limit);
 
-  res.status(200).json({ products, offset, limit });
+  res.status(200).json({ products});
 });
 
 const getProductsByCategoryId = catchAsync(async (req, res) => {
