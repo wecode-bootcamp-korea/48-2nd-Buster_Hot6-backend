@@ -110,7 +110,7 @@ const getProductScrapCountByProductId = async (productId) => {
     );
 
     if (result && result.length > 0) {
-      const scrapCount = result[0].scrap_count; // 수정: scrap_count로 변경
+      const scrapCount = result[0].scrap_count;
       console.log(scrapCount);
       return scrapCount;
     } else {
@@ -120,10 +120,53 @@ const getProductScrapCountByProductId = async (productId) => {
     throw error;
   }
 };
+const getProductScrap = async (userId, productId) => {
+  try {
+    const result = await AppDataSource.query(
+      `
+        INSERT INTO products_scraps (
+        user_id,
+        product_id
+        ) VALUES (
+          ?, ?
+        );
+        `,
+      [userId, productId]
+    );
+    return result;
+  } catch {
+    const error = new Error("dataSource Error");
+    error.ststusCode = 400;
+
+    throw error;
+  }
+};
+
+const deleteProductScrap = async (userId, productId) => {
+  try {
+    const result = await AppDataSource.query(
+      `
+        DELETE FROM products_scraps
+        WHERE user_id = ? AND
+        product_id = ?
+        ;
+        `,
+      [userId, productId]
+    );
+    return result;
+  } catch {
+    const error = new Error("dataSource Error");
+    error.ststusCode = 400;
+
+    throw error;
+  }
+};
 
 module.exports = {
   getAllProducts,
   getProductsByCategoryId,
   getProductDetailById,
   getProductScrapCountByProductId,
+  getProductScrap,
+  deleteProductScrap,
 };

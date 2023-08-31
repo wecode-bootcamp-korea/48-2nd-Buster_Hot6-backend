@@ -2,8 +2,6 @@ const { catchAsync } = require("../utils/error");
 
 const productService = require("../services/productsServices");
 
-const productScrapService = require("../services/productScrapServices");
-
 const getAllProducts = catchAsync(async (req, res) => {
   const { offset = 0, limit = 10 } = req.query;
 
@@ -36,11 +34,24 @@ const productScrapCountByProductId = catchAsync(async (req, res) => {
   if (!productId) {
     throw new Error("productId is required.");
   }
-
-  const count = await productScrapService.getProductScrapCountByProductId(
-    productId
-  );
+  const count = await productService.getProductScrapCountByProductId(productId);
   res.status(200).json({ scrapCount: count });
+});
+
+const getProductScrap = catchAsync(async (req, res) => {
+  const { productId } = req.body;
+  const userId = req.user.id;
+  const posts = await productService.getProductScrap(userId, productId);
+
+  res.status(200).json({ data: posts });
+});
+
+const deleteProductScrap = catchAsync(async (req, res) => {
+  const { productId } = req.body;
+  const userId = req.user.id;
+  const posts = await productService.deleteProductScrap(userId, productId);
+
+  res.status(200).json({ data: posts });
 });
 
 module.exports = {
@@ -48,4 +59,6 @@ module.exports = {
   getProductsByCategoryId,
   getProductDetail,
   productScrapCountByProductId,
+  getProductScrap,
+  deleteProductScrap,
 };

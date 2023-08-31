@@ -1,7 +1,5 @@
 const productsDao = require("../models/productsDao");
 
-const productScrapDao = require("../models/productScrapDao");
-
 const getAllProducts = async (offset, limit) => {
   return await productsDao.getProductsByCategoryId(offset, limit);
 };
@@ -16,10 +14,16 @@ const getProductDetailById = async (productId) => {
 };
 
 const getProductScrapCountByProductId = async (productId) => {
-  const count = await productScrapDao.getProductScrapCountByProductId(
-    productId
-  );
+  const count = await productsDao.getProductScrapCountByProductId(productId);
   return count;
+};
+
+const getProductScrap = async (userId, productId) => {
+  return await productsDao.getProductScrap(userId, productId);
+};
+
+const deleteProductScrap = async (userId, productId) => {
+  return await productsDao.deleteProductScrap(userId, productId);
 };
 
 module.exports = {
@@ -27,4 +31,6 @@ module.exports = {
   getProductsByCategoryId,
   getProductDetailById,
   getProductScrapCountByProductId,
+  getProductScrap,
+  deleteProductScrap,
 };
