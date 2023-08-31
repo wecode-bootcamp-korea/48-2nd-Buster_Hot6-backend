@@ -20,11 +20,12 @@ const setReview = async (userID) => {
    }
  }; 
 
-const createReview = async (userId, content, rating) => {
+const createReview = async (productId, userId, content, rating) => {
     try{
     const result = await AppDataSource.query(
         `
         INSERT INTO reviews (
+         product_id,
          user_id,
          content,
          rating
@@ -32,7 +33,7 @@ const createReview = async (userId, content, rating) => {
         ?,?,?
     );
     `,
-    [ userId, content, rating ]
+    [productId, userId, content, rating ]
     );
     return result;
     }catch{
