@@ -11,8 +11,7 @@ const getPostScrapCountByPostId = async (postId) => {
     );
 
     if (result && result.length > 0) {
-      const scrapCount = result[0].scrap_count; // 수정: scrap_count로 변경
-      console.log(scrapCount);
+      const scrapCount = result[0].scrap_count;
       return scrapCount;
     } else {
       throw new Error("No data found for the given postId");
