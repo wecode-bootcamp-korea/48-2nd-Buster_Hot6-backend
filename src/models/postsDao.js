@@ -42,6 +42,31 @@ const deletePostScrap = async (userId, postId) => {
   }
 };
 
+const getPostDetailById = async (postId) => {
+  try {
+    const postDetail = await AppDataSource.query(
+      `
+          SELECT 
+          p.id as post_id, 
+          p.title as title, 
+          p.content as content,
+          c.name as category_name,
+          u.nickname as user_name,
+          date_format(p.created_at, '%y-%m-%d') as created_at, 
+          date_format(p.updated_at, '%y-%m-%d') as updated_at
+          FROM posts p
+          JOIN post_categories c ON p.post_categories_id = c.id
+          JOIN users u ON p.user_id = u.id
+          WHERE p.id = ?;
+          `,
+      [postId]
+    );
+    return postDetail;
+  } catch {
+    const error = new Error("dataSource Error");
+    error.statusCode = 400;
+  }
+};
 const getPostScrapCountByPostId = async (postId) => {
   try {
     const result = await AppDataSource.query(
@@ -63,4 +88,9 @@ const getPostScrapCountByPostId = async (postId) => {
   }
 };
 
-module.exports = { getPostScrap, deletePostScrap, getPostScrapCountByPostId };
+module.exports = {
+  getPostScrap,
+  deletePostScrap,
+  getPostDetailById,
+  getPostScrapCountByPostId,
+};

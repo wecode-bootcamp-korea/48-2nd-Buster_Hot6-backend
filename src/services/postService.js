@@ -1,8 +1,7 @@
-const postDao = require("../models/postsDao");
+const postsDao = require("../models/postsDao");
 
-
-const getPostScrap = async (userId, postId)=>{
-    return await postDao.getPostScrap(userId, postId);
+const getPostScrap = async (userId, postId) => {
+  return await postsDao.getPostScrap(userId, postId);
 };
 
 const deletePostScrap = async (userId, postId)=>{
