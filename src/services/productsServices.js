@@ -1,7 +1,30 @@
-const { getProductsByCategoryId } = require('../models/productsDao');
+const productsDao = require("../models/productsDao");
 
-const productService = async (categoryId, offset, limit) => {
-  return await getProductsByCategoryId(categoryId, offset, limit);
+const productScrapDao = require("../models/productScrapDao");
+
+const getAllProducts = async (offset, limit) => {
+  return await productsDao.getProductsByCategoryId(offset, limit);
 };
 
-module.exports = { productService };
+const getProductsByCategoryId = async (categoryId, offset, limit) => {
+  return await productsDao.getProductsByCategoryId(categoryId, offset, limit);
+};
+
+const getProductDetailById = async (productId) => {
+  const productDetail = await productsDao.getProductDetailById(productId);
+  return productDetail;
+};
+
+const getProductScrapCountByProductId = async (productId) => {
+  const count = await productScrapDao.getProductScrapCountByProductId(
+    productId
+  );
+  return count;
+};
+
+module.exports = {
+  getAllProducts,
+  getProductsByCategoryId,
+  getProductDetailById,
+  getProductScrapCountByProductId,
+};
