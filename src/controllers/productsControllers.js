@@ -1,16 +1,20 @@
 const { catchAsync } = require("../utils/error");
-const {
-  getProductsByCategoryName,
-  getAllProducts,
-  selectProductDetailDao,
-} = require("../models/productsDao");
-const { productService } = require("../services/productsServices");
 
-const getProductsByCategoryId = catchAsync(async (req, res) => {
-  const { categoryId } = req.query;
+const productService = require("../services/productsServices");
+
+const getAllProducts = catchAsync(async (req, res) => {
   const { offset = 0, limit = 10 } = req.query;
 
-  const products = await productService(
+  const products = await productService.getAllProducts();
+
+  res.status(200).json({ products, offset, limit });
+});
+
+const getProductsByCategoryId = catchAsync(async (req, res) => {
+  const { categoryId } = req.params;
+  const { offset = 0, limit = 10 } = req.query;
+
+  const products = await productService.getProductsByCategoryId(
     categoryId,
     parseInt(offset),
     parseInt(limit)
@@ -19,43 +23,14 @@ const getProductsByCategoryId = catchAsync(async (req, res) => {
   res.status(200).json({ products });
 });
 
-const getProducts = catchAsync(async (req, res) => {
-  const products = await getAllProducts();
-
-  res.status(200).json({ products });
-});
-
-const handleGetProductsByCategory = catchAsync(async (req, res) => {
-  const { categoryName, categoryId, offset = 0, limit = 10 } = req.query;
-
-  if (categoryName) {
-    const products = await getProductsByCategoryName(
-      categoryName,
-      parseInt(offset),
-      parseInt(limit)
-    );
-    return res.json(products);
-  }
-
-  if (categoryId) {
-    req.query.categoryId = categoryId;
-    return getProductsByCategoryId(req, res);
-  }
-
-  if (!categoryName && !categoryId) {
-    return getProducts(req, res);
-  }
-});
-
-const selectProductDetail = catchAsync(async (req, res) => {
-  const { productId } = req.body;
-  const productDetail = await selectProductDetailDao(productId);
+const getProductDetail = catchAsync(async (req, res) => {
+  const { productId } = req.params;
+  const productDetail = await productService.getProductDetailById(productId);
   return res.status(201).json(productDetail);
 });
 
 module.exports = {
+  getAllProducts,
   getProductsByCategoryId,
-  getProducts,
-  handleGetProductsByCategory,
-  selectProductDetail,
+  getProductDetail,
 };
