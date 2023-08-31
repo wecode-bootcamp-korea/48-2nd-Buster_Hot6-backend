@@ -13,19 +13,24 @@ const getProductDetailById = async (productId) => {
   return productDetail;
 };
 
-const getProductScrap = async (userId, productId)=>{
-    return await productsDao.getProductScrap(userId, productId);
+const getProductScrapCountByProductId = async (productId) => {
+  const count = await productsDao.getProductScrapCountByProductId(productId);
+  return count;
 };
 
-const deleteProductScrap = async (userId, productId)=>{
-    return await productsDao.deleteProductScrap(userId, productId);
+const getProductScrap = async (userId, productId) => {
+  return await productsDao.getProductScrap(userId, productId);
 };
 
+const deleteProductScrap = async (userId, productId) => {
+  return await productsDao.deleteProductScrap(userId, productId);
+};
 
 module.exports = {
   getAllProducts,
   getProductsByCategoryId,
   getProductDetailById,
+  getProductScrapCountByProductId,
   getProductScrap,
   deleteProductScrap,
 };
