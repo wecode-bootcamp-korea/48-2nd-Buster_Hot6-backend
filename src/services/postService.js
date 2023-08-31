@@ -1,15 +1,15 @@
-const postScrapDao = require("../models/postsDao");
+const postDao = require("../models/postsDao");
 
 const getCategory = async ()=>{
-    return await postScrapDao.getCategory()
+    return await postDao.getCategory()
 };
 
 const getPostScrap = async (userId, postId)=>{
-    return await postScrapDao.getPostScrap(userId, postId);
+    return await postDao.getPostScrap(userId, postId);
 };
 
 const deletePostScrap = async (userId, postId)=>{
-    return await postScrapDao.deletePostScrap(userId, postId);
+    return await postDao.deletePostScrap(userId, postId);
 };
 
 module.exports = { getCategory, getPostScrap, deletePostScrap }
