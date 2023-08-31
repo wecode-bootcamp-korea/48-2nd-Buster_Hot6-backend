@@ -4,15 +4,25 @@ const getCategory = async ()=>{
     return await postDao.getCategory()
 };
 
-const getPostScrap = async (userId, postId)=>{
-    return await postDao.getPostScrap(userId, postId);
+const getPostScrap = async (userId, postId) => {
+  return await postDao.getPostScrap(userId, postId);
 };
 
 const deletePostScrap = async (userId, postId)=>{
     return await postDao.deletePostScrap(userId, postId);
 };
 
-module.exports = { getCategory, getPostScrap, deletePostScrap }
+const getPostDetailById = async (postId) => {
+    const postDetail = await postDao.getPostDetailById(postId);
+    return postDetail;
+};
+
+const getPostScrapCountByPostId = async (postId) => {
+    const count = await postDao.getPostScrapCountByPostId(postId);
+    console.log(count);
+    return count;
+};
+module.exports = { getPostDetailById, getCategory, getPostScrap, deletePostScrap, getPostScrapCountByPostId }
 
 
 

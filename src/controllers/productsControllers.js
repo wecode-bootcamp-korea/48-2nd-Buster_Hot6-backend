@@ -24,31 +24,41 @@ const getProductsByCategoryId = catchAsync(async (req, res) => {
 });
 
 const getProductDetail = catchAsync(async (req, res) => {
-  const { productId } = req.params;
+  const productId = req.params.productId;
   const productDetail = await productService.getProductDetailById(productId);
   return res.status(201).json(productDetail);
 });
 
-const getProductScrap = catchAsync(async(req, res) =>{
-    const { productId } = req.body;
-    const userId = req.user.id;
-    const posts = await productService.getProductScrap(userId, productId);
-
-    res.status(200).json({ data: posts });
+const productScrapCountByProductId = catchAsync(async (req, res) => {
+  const { productId } = req.query;
+  if (!productId) {
+    throw new Error("productId is required.");
+  }
+  const count = await productService.getProductScrapCountByProductId(productId);
+  res.status(200).json({ scrapCount: count });
 });
 
-const deleteProductScrap = catchAsync(async( req, res ) => {
-    const { productId } = req.body;
-    const userId = req.user.id;
-    const posts = await productService.deleteProductScrap(userId, productId );
+const getProductScrap = catchAsync(async (req, res) => {
+  const { productId } = req.body;
+  const userId = req.user.id;
+  const posts = await productService.getProductScrap(userId, productId);
 
-    res.status(200).json({ data: posts });
+  res.status(200).json({ data: posts });
+});
+
+const deleteProductScrap = catchAsync(async (req, res) => {
+  const { productId } = req.body;
+  const userId = req.user.id;
+  const posts = await productService.deleteProductScrap(userId, productId);
+
+  res.status(200).json({ data: posts });
 });
 
 module.exports = {
   getAllProducts,
   getProductsByCategoryId,
   getProductDetail,
+  productScrapCountByProductId,
   getProductScrap,
   deleteProductScrap,
 };
