@@ -3,11 +3,12 @@ const { catchAsync } = require("../utils/error");
 const productService = require("../services/productsServices");
 
 const getAllProducts = catchAsync(async (req, res) => {
+
   const { offset = 0, limit = 10 } = req.query;
-
+  console.log(req.query)
   const products = await productService.getAllProducts(offset, limit);
-
-  res.status(200).json({ products});
+  console.log(products)
+  res.status(200).json({ products });
 });
 
 const getProductsByCategoryId = catchAsync(async (req, res) => {
