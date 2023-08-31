@@ -4,8 +4,8 @@ const reviewSet = async (userId) =>{
     return await reviewsDao.setReview(userId);
 };
 
-const reviewCreate = async (userId, content, rating) =>{
-    await reviewsDao.createReview(userId, content, rating);
+const reviewCreate = async (productId, userId, content, rating) =>{
+    await reviewsDao.createReview(productId, userId, content, rating);
 };
 
 const reviewModify = async (content, rating, reviewId ) =>{

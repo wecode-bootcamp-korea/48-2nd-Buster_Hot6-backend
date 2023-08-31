@@ -1,16 +1,15 @@
 const express = require("express");
 
-const { productScrapsRouter } = require("./productScrapsRouter")
-const { postScrapsRouter } = require("./postScrapsRouter")
-const { postMainRouter } = require ("./postsMainRouter")
 const routes = express.Router();
-const { userRouter } = require("./userRouter")
-const productsRoutes = require("./productsRoutes")
+
+const { userRouter } = require("./userRouter");
+const { productRouter } = require("./productsRouter");
+const { cartRouter } = require("./cartRouter");
+const { postsRouter } = require("./postsRouter")
 
 routes.use("/users", userRouter);
-routes.use("/product-scrap", productScrapsRouter);
-routes.use("/post-scrap", postScrapsRouter);
-routes.use("/products", productsRoutes);
-routes.use("/get-posts", postMainRouter)
+routes.use("/products", productRouter);
+routes.use("/cart", cartRouter);
+routes.use("/posts", postsRouter)
 
-module.exports = {routes,productsRoutes} ;
+module.exports = { routes };

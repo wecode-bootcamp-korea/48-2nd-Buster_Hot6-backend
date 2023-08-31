@@ -1,6 +1,31 @@
 const { AppDataSource } = require("./dataSource");
 
-const getPostScrapByUser = async (userId, postId) => {
+const getCategory = async () => {
+  try{
+    const result = await AppDataSource.query(
+    `
+      SELECT
+      p.id,
+      p.post_categories_id AS postCategoriesId,
+      p.title,
+      p.content,
+      p.user_id AS userId, 
+      p.image
+      FROM posts p
+      `,
+    []
+  );
+  return result
+} catch {
+  const error = new Error('dataSource Error');
+  error.statusCode = 400;
+
+  throw error;
+  }
+};
+
+
+const getPostScrap = async (userId, postId) => {
   try{
     const [result] = await AppDataSource.query(
     `
@@ -23,7 +48,7 @@ const getPostScrapByUser = async (userId, postId) => {
 }
 
 
-const deletePostScrapByUser = async (userId, postId) => {
+const deletePostScrap = async (userId, postId) => {
   try{
     const [result] = await AppDataSource.query(
     `
@@ -43,4 +68,4 @@ const deletePostScrapByUser = async (userId, postId) => {
 }
 };
 
-module.exports = { getPostScrapByUser, deletePostScrapByUser };
+module.exports = { getCategory, getPostScrap, deletePostScrap };

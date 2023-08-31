@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const userDao  = require("../models/userDao");
-const { validateEmailAndPassword } = require("../utils/validate")
+const userDao = require("../models/userDao");
+const { validateEmailAndPassword } = require("../utils/validate");
 
 const saltRounds = 10;
 
@@ -11,18 +11,14 @@ const hashPassword = async (plaintextPassword) => {
 };
 
 const getUserById = async (id) => {
-    return await userDao.getUserById(id);
+  return await userDao.getUserById(id);
 };
 
 const signUp = async (nickname, email, password) => {
   validateEmailAndPassword(email, password);
 
   const hashedPassword = await hashPassword(password);
-  const createUser = await userDao.createUser(
-    nickname,
-    email,
-    hashedPassword
-  );
+  const createUser = await userDao.createUser(nickname, email, hashedPassword);
   return createUser;
 };
 
@@ -35,7 +31,7 @@ const signIn = async (email, password) => {
 
     throw error;
   }
-  
+
   const isMatched = await bcrypt.compare(password, user.password);
 
   if (!isMatched) {
@@ -44,12 +40,13 @@ const signIn = async (email, password) => {
 
     throw error;
   }
-  const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+  const accessToken = await jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
     algorithm: process.env.ALGORITHM,
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
+  console.log(accessToken);
 
   return accessToken;
 };
 
-module.exports = { signUp,  signIn,  getUserById };
+module.exports = { signUp, signIn, getUserById };

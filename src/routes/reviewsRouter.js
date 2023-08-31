@@ -7,20 +7,17 @@ reviewsRouter.get(
     "/reviews",
     loginRequired,
     reviewsController.reviewSet
-  );
-
+);
 reviewsRouter.post( 
     "/reviews",
     loginRequired, 
     reviewsController.reviewCreate
 );
-
 reviewsRouter.put(
     "/reviews",
     loginRequired,
     reviewsController.reviewModify
 );
-
 reviewsRouter.delete(
     "/reviews",
     loginRequired,

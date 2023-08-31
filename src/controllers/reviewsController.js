@@ -10,8 +10,8 @@ const { catchAsync } = require('../utils/error')
 
 const reviewCreate =  catchAsync(async(req, res) => {
     const userId = req.user.id;
-    const { content, rating } = req.body;
-    const posts = await reviewsService.reviewCreate(userId, content, rating);
+    const { productId, content, rating } = req.body;
+    const posts = await reviewsService.reviewCreate(productId, userId, content, rating);
 
     res.status(200).json({ data: posts });  
 });
