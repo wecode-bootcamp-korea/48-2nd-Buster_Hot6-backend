@@ -1,18 +1,19 @@
-const getPosts = async (postId) => {
+const { AppDataSource } = require("./dataSource");
+
+const getPosts = async () => {
     try{
-      const [result] = await DataSource.query(
+      const result = await AppDataSource.query(
       `
         SELECT
         p.id,
-        p.post_categories_id AS postCategoriesId
+        p.post_categories_id AS postCategoriesId,
         p.title,
         p.content,
-        p.user_id AS userId 
+        p.user_id AS userId, 
         p.image
         FROM posts p
-        WHERE postCategoriesId = ?
         `,
-      [postId]
+      []
     );
     return result
   } catch {

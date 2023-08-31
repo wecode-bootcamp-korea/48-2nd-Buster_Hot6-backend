@@ -1,9 +1,7 @@
 const express = require('express');
-const { postsMainController } = requir ('../controllers/postMainController');
+const postsMainController  = require ('../controllers/postsMainController');
+const postMainRouter = express.Router();
 
-const routes = express.Router();
+postMainRouter.get('/category', postsMainController.getCategory);
 
-routes.get('/category', postsMainController.getCategory);
-routes.get('/all', postsMainController.getAllCategory)
-
-module.exports = { userRouter };
+module.exports = { postMainRouter };

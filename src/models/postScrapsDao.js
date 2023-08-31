@@ -2,7 +2,7 @@ const { AppDataSource } = require("./dataSource");
 
 const getPostScrapByUser = async (userId, postId) => {
   try{
-    const [result] = await DataSource.query(
+    const [result] = await AppDataSource.query(
     `
       INSERT INTO posts_scraps (
       user_id,
