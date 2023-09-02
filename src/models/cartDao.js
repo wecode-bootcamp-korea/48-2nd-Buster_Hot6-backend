@@ -1,6 +1,6 @@
 const { AppDataSource } = require("./dataSource");
 
-const insertCart = async (user_id, product_id, product_count) => {
+const insertCart = async (userId, productId, productCount) => {
   try {
     await AppDataSource.query(
       `
@@ -14,7 +14,7 @@ const insertCart = async (user_id, product_id, product_count) => {
       ?
     );
     `,
-      [user_id, product_id, product_count]
+      [userId, productId, productCount]
     );
   } catch {
     const error = new Error("dataSource Error");

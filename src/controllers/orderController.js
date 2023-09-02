@@ -27,12 +27,11 @@ const postOrder = catchAsync(async(req, res) => {
     res.status(200).json({ data: posts });  
 });
 
-
 const postPayment = catchAsync(async (req, res) => {
     const userId = req.user.id;
     const { amount } = req.body;
 
-  
+
     if (!amount || isNaN(amount) || amount <= 0) {
     return res.status(400).json({ error: 'Invalid amount' });
 }

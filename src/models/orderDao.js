@@ -46,11 +46,17 @@ const postOrder = async (
     throw error;
     }
 };
-
 const postPayment = async (userId, amount) => {
     try {
+        
+        const [initialRows] = await AppDataSource.query(
+            `SELECT point FROM users WHERE id = ?`,
+            [userId]
+        );
+        const originalPoints = parseFloat(initialRows[0]?.point);
+
         const updateResult = await AppDataSource.query(
-            `UPDATE Users SET point = point- ? WHERE id = ?`,
+            `UPDATE Users SET point = point - ? WHERE id = ?`,
             [amount, userId]
         );
 
@@ -65,12 +71,16 @@ const postPayment = async (userId, amount) => {
             [userId, amount]
         );
 
-        const [rows] = await AppDataSource.query(
+        const [updatedRows] = await AppDataSource.query(
             `SELECT point FROM users WHERE id = ?`,
             [userId]
         );
 
-        return {updateResult, rows};
+        const updatedPoints = parseFloat(updatedRows?.point || 0); 
+        
+        const deductedAmount = originalPoints - updatedPoints;
+    
+        return {updateResult, updatedPoints, deductedAmount: amount};
     } catch (err) {
         const error = new Error(err.message || 'Database error');
         error.statusCode = 400;

@@ -4,10 +4,10 @@ const productService = require("../services/productsService");
 
 const getAllProducts = catchAsync(async (req, res) => {
 
-  const { offset = 0, limit = 10 } = req.query;
+  const { offset = 0, limit = 40 } = req.query;
 
   const products = await productService.getAllProducts(parseInt(offset), parseInt(limit));
-  console.log(products)
+
   res.status(200).json({ products });
 });
 

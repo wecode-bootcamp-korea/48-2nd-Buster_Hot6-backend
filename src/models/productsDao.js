@@ -114,7 +114,6 @@ const getProductScrapCountByProductId = async (productId) => {
 
     if (result && result.length > 0) {
       const scrapCount = result[0].scrap_count;
-      console.log(scrapCount);
       return scrapCount;
     } else {
       throw new Error("No data found for the given postId");
