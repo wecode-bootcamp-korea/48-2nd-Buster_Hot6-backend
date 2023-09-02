@@ -9,7 +9,6 @@ const { postsRouter } = require("./postsRouter");
 const { reviewsRouter } = require("./reviewsRouter");
 const { orderRouter } = require("./orderRouter");
 
-
 routes.use("/users", userRouter);
 routes.use("/products", productRouter);
 routes.use("/cart", cartRouter);

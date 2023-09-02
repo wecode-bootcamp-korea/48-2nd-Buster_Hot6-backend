@@ -22,4 +22,10 @@ const postOrder = async (
     );
 };
 
-module.exports = { postOrder };
+const postPayment = async (userId, amount) => {
+    return await oderDao.postPayment(userId, amount);
+};
+
+
+
+module.exports = { postOrder, postPayment };

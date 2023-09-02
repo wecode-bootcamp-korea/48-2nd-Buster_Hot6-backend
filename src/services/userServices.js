@@ -44,7 +44,6 @@ const signIn = async (email, password) => {
     algorithm: process.env.ALGORITHM,
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
-  console.log(accessToken);
 
   return accessToken;
 };

@@ -19,7 +19,6 @@ const getPostDetailById = async (postId) => {
 
 const getPostScrapCountByPostId = async (postId) => {
     const count = await postDao.getPostScrapCountByPostId(postId);
-    console.log(count);
     return count;
 };
 module.exports = { getPostDetailById, getCategory, getPostScrap, deletePostScrap, getPostScrapCountByPostId }

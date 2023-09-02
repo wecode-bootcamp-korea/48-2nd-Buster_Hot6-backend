@@ -1,7 +1,7 @@
 const orderService = require ("../services/orderService")
 const { catchAsync } = require('../utils/error')
 
-const postOrder =  catchAsync(async(req, res) => {
+const postOrder = catchAsync(async(req, res) => {
     const { 
         userId,
         name, 
@@ -12,7 +12,7 @@ const postOrder =  catchAsync(async(req, res) => {
         deliveryPhoneNumber, 
         address 
     } = req.body;
-   
+
     const posts = await orderService.postOrder(
         userId, 
         name, 
@@ -24,7 +24,21 @@ const postOrder =  catchAsync(async(req, res) => {
         address
         );
 
-     res.status(200).json({ data: posts });  
+    res.status(200).json({ data: posts });  
 });
 
-module.exports = { postOrder }
+const postPayment = catchAsync(async (req, res) => {
+    const userId = req.user.id;
+    const { amount } = req.body;
+
+
+    if (!amount || isNaN(amount) || amount <= 0) {
+    return res.status(400).json({ error: 'Invalid amount' });
+}
+
+    const result = await orderService.postPayment(userId, amount);
+
+    res.status(200).json({ data: result });
+});
+
+module.exports = { postOrder, postPayment }

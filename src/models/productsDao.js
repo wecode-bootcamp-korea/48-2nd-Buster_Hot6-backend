@@ -6,7 +6,7 @@ const getAllProducts = async (offset = 0, limit = 10) => {
       `
             SELECT 
             p.id, 
-            p.products_category_ids, 
+            p.products_category_id, 
             p.name, 
             p.price, 
             p.discount_percentage, 
@@ -16,10 +16,12 @@ const getAllProducts = async (offset = 0, limit = 10) => {
             p.created_at, 
             p.updated_at, 
             pc.name as category_name, 
+            b.name as brand_name,
             pi.image_url
             FROM products p
             INNER JOIN products_categories pc ON p.products_category_id = pc.id
-            LEFT JOIN products_images pi ON p.id = pi.product_id
+            INNER JOIN products_images pi ON p.id = pi.product_id
+            LEFT JOIN brands b ON b.id = p.brand_id
             LIMIT ?, ?;
             `,
       [offset, limit]
@@ -40,17 +42,18 @@ const getProductsByCategoryId = async (categoryId, offset = 0, limit = 10) => {
         p.products_category_id, 
         p.name, 
         p.price, 
-        p.discount_percentage, 
-        p.brand_id, 
+        p.discount_percentage,
         p.stock, 
         p.description, 
         p.created_at, 
         p.updated_at, 
         pc.name as category_name,
+        b.name as bradn_name,
         pi.image_url
         FROM products p
         INNER JOIN products_categories pc ON p.products_category_id = pc.id
-        LEFT JOIN products_images pi ON p.id = pi.product_id
+        INNER JOIN products_images pi ON p.id = pi.product_id
+        LEFT JOIN brands b ON b.id = p.brand_id
         WHERE pc.id = ?  
         LIMIT ?, ?;
         `,
@@ -111,7 +114,6 @@ const getProductScrapCountByProductId = async (productId) => {
 
     if (result && result.length > 0) {
       const scrapCount = result[0].scrap_count;
-      console.log(scrapCount);
       return scrapCount;
     } else {
       throw new Error("No data found for the given postId");
