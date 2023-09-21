@@ -7,6 +7,7 @@ WEBNB Project (wecode-project-AirBNB) backend
 23.08.21 ~ 23.09.01
 
 멤버 구성(48-Default-backend)
+
 김창현 : 리뷰CRUD, 주문하기, 커뮤니티 게시글 리스트, (게시글,상품) 스크랩
 
 김시연 : ERD모델링, 장바구니 리스트, 장바구니 삭제, 장바구니 담기, 게시글 상세
